@@ -219,11 +219,12 @@ export const getAllPosts = catchAsync(async (req, res, next) => {
  */
 
 export const getFeed = catchAsync(async (req, res, next) => {
+  const userIds = [...req.user.following, req.user._id];
   const posts = await Post.aggregate([
     {
-      $match:{
-        userId:{$in:req.user.following}
-      }
+      $match: {
+        userId: { $in: userIds },
+      },
     },
     {
       $lookup: {
