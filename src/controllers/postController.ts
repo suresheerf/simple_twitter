@@ -221,6 +221,11 @@ export const getAllPosts = catchAsync(async (req, res, next) => {
 export const getFeed = catchAsync(async (req, res, next) => {
   const posts = await Post.aggregate([
     {
+      $match:{
+        userId:{$in:req.user.following}
+      }
+    },
+    {
       $lookup: {
         from: 'comments',
         localField: 'comments',
