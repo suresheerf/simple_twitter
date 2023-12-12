@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { PORT, DB_URL } from './config/config';
 import app from './app';
 
+console.log(DB_URL);
 mongoose
   .connect(DB_URL)
   .then(() => {
